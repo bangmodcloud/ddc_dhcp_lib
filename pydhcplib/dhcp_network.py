@@ -78,7 +78,6 @@ class DhcpNetwork:
         except socket.error as msg :
             sys.stderr.write( 'pydhcplib.DhcpNetwork.BindToAddress error : '+str(msg))
 
-
     def GetNextDhcpPacket(self,timeout=60):
         data =""
 
@@ -119,6 +118,7 @@ class DhcpNetwork:
 
     def SendDhcpPacketTo(self, packet, _ip,_port):
         return self.dhcp_socket.sendto(packet.EncodePacket(),(_ip,_port))
+
     # Server side Handle methods
     def HandleDhcpDiscover(self, packet):
       	pass
@@ -156,15 +156,21 @@ class DhcpNetwork:
 
 
 class DhcpServer(DhcpNetwork) :
-    def __init__(self, listen_address="0.0.0.0", client_listen_port=68,server_listen_port=67) :
-        
+    def __init__(self, listen_address="0.0.0.0", client_listen_port=68,server_listen_port=67):
         DhcpNetwork.__init__(self,listen_address,server_listen_port,client_listen_port)
-
         self.EnableBroadcast()
         self.DisableReuseaddr()
 
         self.CreateSocket()
         self.BindToAddress()
+
+    # tricky solution to get an ip address
+    def GetServerIdentifier(self):
+        temp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        temp_socket.connect(("8.8.8.8", 80))
+        ip_identifer = temp_socket.getsockname()[0]
+        temp_socket.close()
+        return ip_identifer
 
 class DhcpClient(DhcpNetwork) :
     def __init__(self, listen_address="0.0.0.0", client_listen_port=68,server_listen_port=67) :

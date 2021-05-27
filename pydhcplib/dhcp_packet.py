@@ -325,7 +325,6 @@ class DhcpPacket(DhcpBasicPacket):
 
     """ Dhcp NACK packet creation """
     def CreateDhcpNackPacketFrom(self,src): # src = request or inform packet
-        
         self.SetOption("htype",src.GetOption("htype"))
         self.SetOption("xid",src.GetOption("xid"))
         self.SetOption("flags",src.GetOption("flags"))
