@@ -34,11 +34,14 @@ class DhcpPacketHandler:
   def CreateOfferPacket(self, packet):
       offer = DhcpPacket()
       offer.CreateDhcpOfferPacketFrom(packet)
+      # todo assign the proper ip to client
       offer.SetOption("yiaddr", [10,10,8,11])
       offer.SetLeaseTime(86400)
+      # todo assign the proper router ip
       offer.SetOption("router", [10,10,8,1])
       offer.SetOption("subnet_mask", [255,255,255,0])
       offer.SetOption("server_identifier", self.server_identifier)
+      # todo assign the proper router ip
       offer.SetOption("tftp_server_name", strlist("10.10.8.1").list())
       offer.SetOption("domain_name_server", [8,8,8,8])
       self.SelectBootfile(packet, offer)
