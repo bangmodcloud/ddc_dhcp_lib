@@ -1,5 +1,5 @@
-# ddc_dhcp_server
-Custom dhcp server for dedicated server.
+# ddc_dhcp_lib
+Custom dhcp library for dedicated server.
 
 # pydhcplib
 http://pydhcplib.tuxfamily.org/pmwiki/
