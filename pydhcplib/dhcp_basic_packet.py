@@ -115,10 +115,6 @@ class DhcpBasicPacket:
         sys.stderr.write( "pydhcplib.dhcp_basic_packet.setoption error : unknown option "+name)
         return False
 
-    # due to ip len size
-    def SetLeaseTime(self, lease_time_decimal):
-        self.SetOption("ip_address_lease_time", [(b) for b in pack('>L', 86400)])
-
     def IsOption(self,name):
         if name in self.options_data : return True
         elif name in DhcpFields : return True

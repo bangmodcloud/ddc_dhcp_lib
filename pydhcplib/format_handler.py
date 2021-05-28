@@ -1,4 +1,5 @@
 from pydhcplib.dhcp_packet import *
+import sys
 
 class FormatHandler:
   def fromstr(_str):
