@@ -55,7 +55,7 @@ class hwmac:
             
     # Convert NumList type ip to String type ip
     def _NumlistToString(self) :
-        self._hw_string = ":".join(map(hexlify,list(map(chr,self._hw_numlist))))
+        self._hw_string = ":".join(map(hexlify,list(map(lambda x: x.to_bytes(1, "big"), self._hw_numlist))))
 
     # Convert String type ip to NumList type ip
     # return ip string
