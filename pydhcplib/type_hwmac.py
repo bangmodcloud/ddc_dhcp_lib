@@ -54,8 +54,11 @@ class hwmac:
             self._hw_numlist.append(ord(unhexlify(twochar)))
             
     # Convert NumList type ip to String type ip
-    def _NumlistToString(self) :
-        self._hw_string = ":".join(map(hexlify,list(map(lambda x: x.to_bytes(1, "big"), self._hw_numlist))))
+    def _NumlistToString(self):
+        self._hw_string = b':'.join(map(self.__hexlifybyte__, list(map(chr, self._hw_numlist)))).decode("utf-8")
+    
+    def __hexlifybyte__(self, byte):
+      return hexlify(bytearray(byte, encoding='utf8'))
 
     # Convert String type ip to NumList type ip
     # return ip string
@@ -79,7 +82,3 @@ class hwmac:
     def __bool__(self) :
         if self._hw_string != "00:00:00:00:00:00" : return 1
         return 0
-
-
-
-
