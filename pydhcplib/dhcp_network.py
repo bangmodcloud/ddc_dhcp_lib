@@ -211,8 +211,6 @@ class DhcpClientOld(DhcpNetwork) :
         except socket.error as msg :
             sys.stderr.write( 'pydhcplib.DhcpClient bind error : '+str(msg))
 
-            
-
     def BindToAddress(self) :
         try :
             self.dhcp_socket.bind((self.listen_address, self.listen_port))
