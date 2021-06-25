@@ -92,9 +92,7 @@ class DhcpNetwork:
             if data != "" :
                 packet = dhcp_packet.DhcpPacket()
                 packet.source_address = source_address
-                print(packet.source_address)
                 packet.DecodePacket(data)
-
                 self.HandleDhcpAll(packet)
                 
                 if packet.IsDhcpDiscoverPacket():
